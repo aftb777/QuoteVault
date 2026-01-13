@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import Supabase
 
 @main
 struct QuoteVaultApp: App {
+
+    @StateObject var authVM = AuthViewModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(authVM)
+                .task { await authVM.checkSession() }
         }
     }
 }
