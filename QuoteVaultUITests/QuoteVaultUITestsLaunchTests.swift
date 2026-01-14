@@ -2,7 +2,6 @@
 //  QuoteVaultUITestsLaunchTests.swift
 //  QuoteVaultUITests
 //
-//  Created by Aftaab Mulla on 13/01/26.
 //
 
 import XCTest

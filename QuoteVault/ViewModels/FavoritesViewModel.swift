@@ -2,7 +2,6 @@
 //  FavoritesViewModel.swift
 //  QuoteVault
 //
-//  Created by Aftaab Mulla on 13/01/26.
 //
 
 import Combine
@@ -26,7 +25,7 @@ final class FavoritesViewModel: ObservableObject {
 
     private let supabase = SupabaseManager.shared.client
 
-    // Load favorites
+
     func load(userId: String) async {
         do {
             let response: PostgrestResponse<[FavoriteRow]> = try await supabase

@@ -2,7 +2,6 @@
 //  AuthViewModel.swift
 //  QuoteVault
 //
-//  Created by Aftaab Mulla on 13/01/26.
 //
 
 import Foundation
@@ -19,7 +18,6 @@ final class AuthViewModel: ObservableObject {
 
     private let supabase = SupabaseManager.shared.client
 
-    // Restore session
     func checkSession() async {
         do {
             let session = try await supabase.auth.session
@@ -36,8 +34,6 @@ final class AuthViewModel: ObservableObject {
         }
     }
 
-
-    // Email Login
     func login(email: String, password: String) async throws {
         let response = try await supabase.auth.signIn(
             email: email,
@@ -49,7 +45,6 @@ final class AuthViewModel: ObservableObject {
         self.isLoggedIn = true
     }
 
-    // Email Signup
     func signup(email: String, password: String) async throws {
         let response = try await supabase.auth.signUp(
             email: email,
@@ -61,12 +56,10 @@ final class AuthViewModel: ObservableObject {
         self.isLoggedIn = true
     }
 
-    // Reset password
     func resetPassword(email: String) async throws {
         try await supabase.auth.resetPasswordForEmail(email)
     }
 
-    // Logout
     func logout() async {
         try? await supabase.auth.signOut()
         self.isLoggedIn = false

@@ -2,24 +2,30 @@
 //  SettingsView.swift
 //  QuoteVault
 //
-//  Created by Aftaab Mulla on 13/01/26.
 //
 
 import SwiftUI
 
 struct SettingsView: View {
 
-    @StateObject var vm = SettingsViewModel()
+    @EnvironmentObject var vm: SettingsViewModel
 
     var body: some View {
         Form {
-            Toggle("Dark Mode", isOn: $vm.darkMode)
-            Slider(value: $vm.fontSize, in: 14...30) {
-                Text("Font Size")
+
+            Section("Appearance") {
+                Toggle("Dark Mode", isOn: $vm.darkMode)
+
+                Slider(value: $vm.fontSize, in: 14...30, step: 1) {
+                    Text("Font Size")
+                }
+
+                Text("Preview text size")
+                    .font(.system(size: vm.fontSize))
             }
         }
-        .onDisappear { vm.save() }
-        .onAppear { vm.load() }
         .navigationTitle("Settings")
+        .onAppear { vm.load() }
+        .onDisappear { vm.save() }
     }
 }

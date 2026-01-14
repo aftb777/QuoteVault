@@ -2,7 +2,6 @@
 //  SupabaseManager.swift
 //  QuoteVault
 //
-//  Created by Aftaab Mulla on 13/01/26.
 //
 
 import Supabase
@@ -12,7 +11,7 @@ final class SupabaseManager {
     static let shared = SupabaseManager()
 
     let client = SupabaseClient(
-        supabaseURL: URL(string: "YOUR_URL")!,
-        supabaseKey: "YOUR_ANON_KEY"
+        supabaseURL: URL(string: "Your_Api_Key")!,
+        supabaseKey: "Your_Anon_Key"
     )
 }

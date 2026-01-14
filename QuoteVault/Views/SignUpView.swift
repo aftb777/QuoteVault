@@ -2,7 +2,6 @@
 //  SignUpView.swift
 //  QuoteVault
 //
-//  Created by Aftaab Mulla on 13/01/26.
 //
 
 import SwiftUI

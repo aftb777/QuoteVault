@@ -2,7 +2,6 @@
 //  QuoteVaultApp.swift
 //  QuoteVault
 //
-//  Created by Aftaab Mulla on 13/01/26.
 //
 
 import SwiftUI
@@ -12,12 +11,19 @@ import Supabase
 struct QuoteVaultApp: App {
 
     @StateObject var authVM = AuthViewModel()
+    @StateObject var settingsVM = SettingsViewModel()
 
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(authVM)
-                .task { await authVM.checkSession() }
+                .environmentObject(settingsVM)
+                .preferredColorScheme(settingsVM.darkMode ? .dark : .light)
+                .task {
+                    await authVM.checkSession()
+                    settingsVM.load()
+                }
         }
     }
 }
+

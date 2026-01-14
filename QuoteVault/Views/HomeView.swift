@@ -2,26 +2,45 @@
 //  HomeView.swift
 //  QuoteVault
 //
-//  Created by Aftaab Mulla on 13/01/26.
 //
 
 import SwiftUI
 
 struct HomeView: View {
 
-    @StateObject var vm = QuoteViewModel()
+    @StateObject private var vm = QuoteViewModel()
 
     var body: some View {
         NavigationStack {
-            List(vm.quotes) { quote in
-                QuoteCard(quote: quote)
+            Group {
+                if vm.quotes.isEmpty {
+                    ProgressView("Loading quotes...")
+                } else {
+                    List {
+                        
+                        if let daily = vm.dailyQuote {
+                            Section("🌟 Quote of the Day") {
+                                QuoteCard(quote: daily)
+                            }
+                        }
+
+                        Section("All Quotes") {
+                            ForEach(vm.quotes) { quote in
+                                QuoteCard(quote: quote)
+                            }
+                        }
+                    }
+                }
             }
             .navigationTitle("Quotes")
             .task {
                 await vm.loadQuotes()
                 await vm.loadDailyQuote()
             }
-            .refreshable { await vm.loadQuotes() }
+            .refreshable {
+                await vm.loadQuotes()
+                await vm.loadDailyQuote()
+            }
         }
     }
 }
