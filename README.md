@@ -92,4 +92,3 @@ Select any iPhone simulator <br>
 Press ▶ Run <br>
 Sign up / Login <br>
 🎉 Quotes will load from Supabase <br>
-
